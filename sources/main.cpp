@@ -1,10 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <list>
 #include <time.h>
 
 #include "list.h"
 #include "utils.h"
+
+#include <list>
+#include <new>
+
+struct AllocStats {
+  static inline size_t total_bytes = 0;
+  static inline size_t peak_bytes = 0;
+
+};
+
+template <typename T>
+struct SimpleCountingAllocator : AllocStats {
+    using value_type = T;
+
+    SimpleCountingAllocator() = default;
+
+    T* allocate(std::size_t n) {
+        size_t bytes = n * sizeof(T);
+        total_bytes += bytes;
+        if (total_bytes > peak_bytes) {
+          peak_bytes = total_bytes;
+        }
+        return static_cast<T*>(::operator new(bytes));
+    }
+
+    void deallocate(T* p, std::size_t n) noexcept {
+        size_t bytes = n * sizeof(T);
+        total_bytes -= bytes;
+        ::operator delete(p);
+    }
+};
 
 int main() {
   clear();
@@ -53,22 +83,28 @@ int main() {
   free(arr);
 
 
-  std::list<double> l1 = {};
-  List * l2 = NULL;
-  listInit(&l2);
+  std::list<double, SimpleCountingAllocator<double>> l1 = {};
   time_t t0 = clock();
   for (int i = 0; i < 10000000; i++) {
     l1.insert(l1.begin(), rand() % 1000000);
   }
   time_t t1 = clock();
-  printf("std: %lg\n", (double) (t1 - t0) / CLOCKS_PER_SEC);
+  printf("std: %lg, %zu\n", (double) (t1 - t0) / CLOCKS_PER_SEC, SimpleCountingAllocator<double>::peak_bytes);
+
+
+  List * l2 = NULL;
+  listInit(&l2);
   time_t t2 = clock();
   for (int i = 0; i < 10000000; i++) {
     listInsertRight(l2, 0, rand() % 1000000);
   }
   time_t t3 = clock();
-  printf("my: %lg\n", (double) (t3 - t2) / CLOCKS_PER_SEC);
+  size_t size = 0;
+  listGetSize(l2, &size);
+  printf("my: %lg, %zu\n", (double) (t3 - t2) / CLOCKS_PER_SEC, 5 * sizeof(size_t) + sizeof(list_t) * size + 2 * sizeof(int) * size);
   printf("div: %lg\n", double(t1 - t0) / double(t3 - t2));
   listDestroy(l2);
+
+
   return 0;
 }
