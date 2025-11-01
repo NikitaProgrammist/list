@@ -32,7 +32,7 @@ enum Errors {
 
 Errors verify(const List * list, const char * file, const char * func, const size_t len, const char * position);
 Errors checkCycle(const List * list);
-void dump(const List * list, const char * file, const char * func, const size_t len, const char * position);
+void dump(const List * list, const char * file, const char * func, const size_t len, const char * position, Errors img);
 void createGraph(const List * list, size_t picture_number);
 void printErrorLines(const char * file, const char * func, size_t line_number);
 

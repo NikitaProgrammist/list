@@ -12,4 +12,6 @@ struct List {
   size_t last_canary;
 };
 
+ListErr listRealloc(List * list);
+
 #endif // PRIVATE_LIST_H
