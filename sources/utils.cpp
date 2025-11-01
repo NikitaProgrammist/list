@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "list.h"
 #include "utils.h"
 
 void clear() {
   system("rm -rf \"/home/nikita/Рабочий стол/list/img/\" && mkdir \"/home/nikita/Рабочий стол/list/img/\"");
-  FILE *file = fopen("filename.txt", "w");
+  FILE *file = fopen("../log.html", "w");
   if (file != NULL) {
     fclose(file);
   }
