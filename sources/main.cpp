@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <list>
+#include <time.h>
 
 #include "list.h"
+#include "utils.h"
 
 int main() {
-  system("rm -rf \"/home/nikita/Рабочий стол/list/img/\"");
+  clear();
   List * list = NULL;
   list_t result = 0;
   listInit(&list);
@@ -48,5 +51,24 @@ int main() {
   listDestroy(list);
   listDestroy(arraylist);
   free(arr);
+
+
+  std::list<double> l1 = {};
+  List * l2 = NULL;
+  listInit(&l2);
+  time_t t0 = clock();
+  for (int i = 0; i < 10000000; i++) {
+    l1.insert(l1.begin(), rand() % 1000000);
+  }
+  time_t t1 = clock();
+  printf("std: %lg\n", (double) (t1 - t0) / CLOCKS_PER_SEC);
+  time_t t2 = clock();
+  for (int i = 0; i < 10000000; i++) {
+    listInsertRight(l2, 0, rand() % 1000000);
+  }
+  time_t t3 = clock();
+  printf("my: %lg\n", (double) (t3 - t2) / CLOCKS_PER_SEC);
+  printf("div: %lg\n", double(t1 - t0) / double(t3 - t2));
+  listDestroy(l2);
   return 0;
 }

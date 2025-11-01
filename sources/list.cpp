@@ -35,7 +35,7 @@ ListErr listInsertRight(List * list, size_t index, list_t value) {
     return INCORRECT_INDEX;
   }
   list->data[list->free_head] = value;
-  list_t swap = list->next[list->free_head];
+  int swap = list->next[list->free_head];
   list->next[list->free_head] = list->next[index];
   list->next[index] = list->free_head;
   list->free_head = swap;
