@@ -11,13 +11,13 @@ void check() {
   list_t elem = 0;
 
 
-  std::list<double, SimpleCountingAllocator<double>> l1 = {};
+  std::list<double> l1 = {};
   time_t t0 = clock();
   for (int i = 0; i < 10000000; i++) {
     l1.insert(l1.begin(), rand() % 1000000);
   }
   time_t t1 = clock();
-  printf("std: %lg, %zu\n", (double) (t1 - t0) / CLOCKS_PER_SEC, SimpleCountingAllocator<double>::peak_bytes);
+  printf("std: %lg, %zu\n", (double) (t1 - t0) / CLOCKS_PER_SEC, sizeof(l1) * 10000000);
 
 
   List * l2 = NULL;

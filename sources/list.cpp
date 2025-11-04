@@ -79,6 +79,7 @@ ListErr listDelete(List * list, size_t index, list_t * value) {
     return INCORRECT_INDEX;
   }
   listVerify(list, "BEFORE");
+  *value = list->data[index];
   list->next[list->prev[index]] = list->next[index];
   list->prev[list->next[index]] = list->prev[index];
   list->next[index] = list->free_head;

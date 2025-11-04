@@ -6,7 +6,7 @@
 #include "time_memory.h"
 
 int main() {
-  clear();
+  //clear();
   test();
   check();
 
