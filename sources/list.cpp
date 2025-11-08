@@ -90,14 +90,11 @@ ListErr listDelete(List * list, size_t index, list_t * value) {
   return SUCCESS;
 }
 
-// for (iterator_t i = Begin(); i != End(); i = Next())
-
-ListErr listDestroy(List * list) {
+void listDestroy(List * list) {
   free(list->prev);
   free(list->next);
   free(list->data);
   free(list);
-  return SUCCESS;
 }
 
 ListErr listGetLen(List * list, size_t * len) {

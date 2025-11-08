@@ -6,7 +6,7 @@
 #include "utils.h"
 
 void clear() {
-  system("rm -rf \"/home/nikita/Рабочий стол/list/img/\" && mkdir \"/home/nikita/Рабочий стол/list/img/\"");
+  system("rm -rf \"./img/\" && mkdir \"./img/\"");
   FILE *file = fopen("../log.html", "w");
   if (file != NULL) {
     fclose(file);

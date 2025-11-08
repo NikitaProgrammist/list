@@ -23,7 +23,7 @@ ListErr listInit(List ** list);
 ListErr listInsertRight(List * list, size_t index, list_t value);
 ListErr listInsertLeft(List * list, size_t index, list_t value);
 ListErr listDelete(List * list, size_t index, list_t * value);
-ListErr listDestroy(List * list);
+void listDestroy(List * list);
 ListErr listGetLen(List * list, size_t * len);
 ListErr listGetSize(List * list, size_t * size);
 ListErr listBegin(List * list, size_t * head);

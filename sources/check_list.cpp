@@ -41,7 +41,7 @@ Errors checkCycle(const List * list) {
 }
 
 void dump(const List * list, const char * file, const char * func, const size_t len, const char * position, Errors img) {
-  FILE * fp = fopen("../log.html", "a");
+  FILE * fp = fopen("./log.html", "a");
   if (fp == NULL) {
     return;
   }
@@ -86,7 +86,7 @@ void dump(const List * list, const char * file, const char * func, const size_t 
 
 void createGraph(const List * list, size_t picture_number) {
   char filename[100];
-  sprintf(filename, "../img/img%zu.txt", picture_number);
+  sprintf(filename, "./img/img%zu.txt", picture_number);
   FILE * file = fopen(filename, "w");
 
   if (file == NULL) {
@@ -212,7 +212,7 @@ void createGraph(const List * list, size_t picture_number) {
   fprintf(file, "}\n");
   fclose(file);
   char command[256];
-  snprintf(command, sizeof(command), "dot -Tpng \"../img/img%zu.txt\" -o \"../img/img%zu.png\" -n2", picture_number, picture_number);
+  snprintf(command, sizeof(command), "dot -Tpng \"./img/img%zu.txt\" -o \"./img/img%zu.png\" -n2", picture_number, picture_number);
   system(command);
 }
 
