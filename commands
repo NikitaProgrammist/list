@@ -1,0 +1,2 @@
+perf record -e cycles -c 1000000 -g -o tma_detailed.data ./build/main check
+perf report -i tma_detailed.data --stdio --header --full-source-path --sort srcline,symbol > detailed_analysis.txt
