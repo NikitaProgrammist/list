@@ -1,2 +1,28 @@
 perf record -e cycles -c 1000000 -g -o tma_detailed.data ./build/main check
 perf report -i tma_detailed.data --stdio --header --full-source-path --sort srcline,symbol > detailed_analysis.txt
+
+
+
+1 2 3 4 5 6 7 0 8 9 10 11 12 13 14
+60 70 20 90 50 80
+std: 5.71343
+boost: 5.44333
+my: 3.00228
+std delete: 2.40919
+boost delete: 2.19782
+my delete: 0.332937
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0,380 MB tma_detailed2.data (2902 samples) ]
+
+
+
+1 2 3 4 5 6 7 0 8 9 10 11 12 13 14
+60 70 20 90 50 80
+std: 3.60683
+boost: 3.43532
+my: 2.45408
+std delete: 1.64022
+boost delete: 1.56502
+my delete: 0.416284
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0,290 MB tma_detailed2.data (2218 samples) ]
