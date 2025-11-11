@@ -21,15 +21,15 @@ void test() {
   listDelete(list, 0, &result);
   List * arraylist = NULL;
   listInit(&arraylist);
-  double array[15] = {1, 2, 3, 4, 5, 6, 7, 0, 8, 9, 10, 11, 12, 13, 14};
+  list_t array[15] = {1, 2, 3, 4, 5, 6, 7, 0, 8, 9, 10, 11, 12, 13, 14};
   ArrayToList(arraylist, array, 15);
-  double * arr = NULL;
+  list_t * arr = NULL;
   size_t n = 0;
   ListToArray(list, &arr, &n);
 
 
   size_t start = 0, end = 0;
-  double elem = 0;
+  list_t elem = 0;
   ListErr result1 = listBegin(arraylist, &start), result2 = listEnd(arraylist, &end);
   if (result1 == SUCCESS && result2 == SUCCESS) {
     for (; start != end; listGetNextIndex(arraylist, start, &start)) {

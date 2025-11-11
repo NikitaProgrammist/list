@@ -159,7 +159,7 @@ ListErr ListToArray(List * list, list_t ** array, size_t * len) {
   listVerify(list, "BEFORE");
   *len = list->len;
   size_t start = 0, end = 0, i = 0;
-  double elem = 0;
+  list_t elem = 0;
   *array = (list_t *) calloc(list->len, sizeof(list_t));
   listBegin(list, &start);
   listEnd(list, &end);
